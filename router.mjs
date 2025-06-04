@@ -32,6 +32,13 @@ export function handleRoutes(req, res) {
     return;
   }
 
+  // health check endpoint for Render
+  if (req.url === "/health") {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ status: "healthy" }));
+    return;
+  }
+
   // Determine file path based on URL
   let filePath;
   if (req.url === "/") {

@@ -1,7 +1,9 @@
 // Get the current hostname/IP from the browser URL
 const host = window.location.hostname;
-const port = 1337;
-const socket = new WebSocket(`ws://${host}:${port}`);
+const port = window.location.port || (window.location.protocol === 'https:' ? 443 : 1337);
+const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+const socket = new WebSocket(`${wsProtocol}//${host}:${port}`);
+
 
 let username = `User${Math.round(Math.random() * 100)}`; // Temporary name until server assigns one
 

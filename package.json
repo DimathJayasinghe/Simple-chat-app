@@ -8,5 +8,8 @@
     "start": "node server.mjs",
     "dev": "node --watch server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
