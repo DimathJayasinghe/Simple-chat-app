@@ -7,13 +7,44 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="username-modal" class="username-modal">
+      <div class="username-modal-content">
+        <div class="disclaimer-banner">
+          <span class="disclaimer-icon">⚠️</span>
+          <span class="disclaimer-text">
+            Please enter a username. Use appropriate language—offensive names
+            are not allowed.
+          </span>
+        </div>
+        <label for="username-input" class="username-label"
+          >Enter a username for yourself:</label
+        >
+        <input
+          type="text"
+          id="username-input"
+          class="username-input"
+          maxlength="20"
+          autofocus
+        />
+        <button id="username-submit" class="username-submit">Enter Chat</button>
+      </div>
+    </div>
     <div id="chat-container" class="chat-container">
-      <div class="disclaimer-banner">
+      <div class="disclaimer-banner" id="chat-disclaimer-banner">
         <span class="disclaimer-icon">⚠️</span>
-        <span class="disclaimer-text">Please note: This is a public chat room. Be respectful to others. The developers are not responsible for user-generated content.</span>
+        <span class="disclaimer-text">
+          Please note: This is a public chat room. Be respectful to others. The
+          developers are not responsible for user-generated content.
+        </span>
+        <button
+          class="disclaimer-close"
+          id="disclaimer-close-btn"
+          title="Close"
+        >
+          &times;
+        </button>
       </div>
-      <div id="messages-area" class="messages-area">
-      </div>
+      <div id="messages-area" class="messages-area"></div>
       <div class="hidden" id="new-message-popup">⬇️!</div>
       <div class="message-form">
         <input

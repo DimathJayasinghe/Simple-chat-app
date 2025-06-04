@@ -5,7 +5,7 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #0f0f0f;
 }
 
 .chat-container {
@@ -17,7 +17,7 @@ body {
     width: 80%;
     max-width: 600px;
     height: 80vh;
-    background-color: white;
+    background-color: #0f0f0f;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -32,7 +32,7 @@ body {
 }
 
 .message-bubble {
-    background-color: #f8eed0;
+    background: #f5f5f5;
     width: fit-content;
     max-width: 80%;
     padding: 12px;
@@ -40,6 +40,8 @@ body {
     border-radius: 15px;
     margin-bottom: 10px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 5px;
+    transition: background 0.2s;
 }
 
 .message-author {
@@ -67,20 +69,22 @@ body {
 .message-input {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
+    background-color: #262626;
+    color: #eaeaea;
+    border: 1px solid #545454;
+    border-radius: 10px;
     outline: none;
 }
 
 .message-input:focus {
-    border-color: #aaa;
+    border-color: #878787;
 }
 
 .send-button {
-    background-color: #4caf50;
+    background-color: #0f0f0f;
     color: white;
-    border: none;
-    border-radius: 20px;
+    border: 1px solid #878787;
+    border-radius: 10px;
     padding: 0 20px;
     cursor: pointer;
     font-weight: bold;
@@ -88,17 +92,18 @@ body {
 }
 
 .send-button:hover {
-    background-color: #388e3c;
+    background-color: white;
+    color: #0f0f0f;
 }
 
 .system-message {
     text-align: center;
-    color: #757575;
+    color: #878787;
     font-size: 0.9rem;
     margin: 10px 0;
     font-style: italic;
     padding: 5px;
-    background-color: #f0f0f0;
+    background-color: #262626;
     border-radius: 10px;
 }
 
@@ -106,6 +111,7 @@ body {
     background-color: #e3f2fd;
     margin-left: auto;
     border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 10px;
     margin-right: 9px;
 }
 
@@ -119,7 +125,7 @@ body {
     border-radius: 10px;
     padding: 10px;
     align-items: center;
-    background-color: rgba(87, 59, 228, 0.8);
+    background-color: #262626;
     color: #e3f2fd;
     animation: jump 0.6s ease-in-out 3;
     margin-left: auto;
@@ -131,8 +137,8 @@ body {
     z-index: 10;
 }
 
-#new-message-popup:hover{
-    background-color: rgba(87, 59, 228, 1);
+#new-message-popup:hover {
+    background-color: #3d3d3d;
     transform: scale(1.01);
 }
 
@@ -155,7 +161,7 @@ body {
     }
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
@@ -172,7 +178,7 @@ body {
     gap: 10px;
     font-size: 0.85rem;
     color: #5d4037;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .disclaimer-icon {
@@ -182,4 +188,112 @@ body {
 
 .disclaimer-text {
     line-height: 1.4;
+}
+
+.disclaimer-close {
+    background: none;
+    border: none;
+    color: #5d4037;
+    font-size: 1.2rem;
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 6px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.disclaimer-close:hover {
+    background: #ffe0b2;
+}
+
+/* Username Modal Styles */
+.username-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 30, 30, 0.3);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s;
+}
+
+.username-modal-content {
+    background: #181818cc;
+    border-radius: 16px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+    padding: 32px 28px 24px 28px;
+    min-width: 320px;
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    animation: fadeIn 0.5s;
+    margin: 0 auto;
+}
+
+.username-label {
+    color: #eaeaea;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.username-input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #545454;
+    background: #232323;
+    color: #eaeaea;
+    font-size: 1rem;
+    outline: none;
+}
+
+.username-input:focus {
+    border-color: #878787;
+}
+
+.username-submit {
+    margin-top: 10px;
+    padding: 10px 0;
+    border-radius: 8px;
+    border: none;
+    background-color: #0f0f0f;
+    color: white;
+    border: 1px solid #878787;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.username-submit:hover {
+    background: white;
+    color: #0f0f0f;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.username-modal.hide {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
 }

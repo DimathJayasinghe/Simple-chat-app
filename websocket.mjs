@@ -12,6 +12,46 @@ const MAXIMUM_SIXTEEN_BITS_INTEGER = 2 ** 16;
 // Track all connected clients with their associated user IDs
 const connectedClients = new Map(); // socket -> userId
 const usedUserIds = new Set(); // Keep track of assigned user IDs
+const clientUsernames = new Map(); // socket -> username
+const USER_COLORS = [
+  "#ffe082",
+  "#b3e5fc",
+  "#c8e6c9",
+  "#ffd180",
+  "#f8bbd0",
+  "#d1c4e9",
+  "#fff9c4",
+  "#b2dfdb",
+  "#f0f4c3",
+  "#ffecb3",
+  "#e1bee7",
+  "#b2ebf2",
+  "#c5e1a5",
+  "#ffccbc",
+  "#f0f4c3",
+  "#f8bbd0",
+  "#dcedc8",
+  "#f5f5f5",
+  "#e0f7fa",
+  "#ffe0b2",
+  "#f9fbe7",
+  "#e6ee9c",
+  "#b3e5fc",
+  "#fce4ec",
+  "#f3e5f5",
+  "#e8f5e9",
+  "#fffde7",
+  "#fbe9e7",
+  "#ede7f6",
+  "#e0f2f1",
+  "#f1f8e9",
+  "#fff3e0",
+  "#f9fbe7",
+  "#e3f2fd",
+  "#fce4ec",
+];
+const availableColors = new Set(USER_COLORS);
+const clientColors = new Map(); // socket -> color
 
 // Generate a unique user ID
 function generateUniqueUserId() {
@@ -87,8 +127,13 @@ function cleanupClient(socket) {
     console.log(`Client ${userId} disconnected`);
     usedUserIds.delete(userId);
   }
-
   connectedClients.delete(socket);
+  clientUsernames.delete(socket);
+  // Release color
+  if (clientColors.has(socket)) {
+    availableColors.add(clientColors.get(socket));
+    clientColors.delete(socket);
+  }
   console.log(`Client disconnected, total clients: ${connectedClients.size}`);
 }
 
@@ -180,18 +225,31 @@ function onSocketReadable(socket) {
     try {
       const data = JSON.parse(received);
 
-      // If user is using a random ID from the client, replace it with the server-assigned ID
-      if (data.username && data.username.startsWith("User")) {
-        const serverAssignedId = connectedClients.get(socket);
-        if (serverAssignedId) {
-          data.username = serverAssignedId;
+      // Handle username set
+      if (data.type === "setUsername" && typeof data.username === "string") {
+        if (!clientColors.has(socket)) {
+          // Assign a color from the pool
+          const color = availableColors.values().next().value || "#e0e0e0";
+          clientColors.set(socket, color);
+          availableColors.delete(color);
         }
+        clientUsernames.set(socket, data.username.trim().substring(0, 20));
+        console.log(
+          `Username set for ${connectedClients.get(socket)}: ${data.username}`
+        );
+        return;
       }
 
-      console.log("Message Received!", data);
+      // For chat messages, always use userId from socket
+      const userId = connectedClients.get(socket);
+      data.userId = userId;
+      data.username = clientUsernames.get(socket);
+      data.color = clientColors.get(socket);
 
-      // Broadcast the message to all clients
-      broadcastMessage(data);
+      // Only broadcast if message is present
+      if (data.message) {
+        broadcastMessage(data);
+      }
     } catch (jsonError) {
       console.error("Error parsing JSON message:", jsonError);
     }
