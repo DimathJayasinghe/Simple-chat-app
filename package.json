@@ -1,0 +1,12 @@
+{
+  "name": "simple-chat-using-websockets",
+  "version": "1.0.0",
+  "description": "A real-time chat application built from scratch using raw WebSockets in Node.js",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
