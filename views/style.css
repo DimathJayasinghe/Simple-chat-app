@@ -10,7 +10,7 @@ body {
 
 .chat-container {
     display: grid;
-    grid-template-rows: 11fr 1fr;
+    grid-template-rows: 1fr 10fr 1fr;
     border: 1px solid #ccc;
     padding: 15px;
     border-radius: 10px;
@@ -157,4 +157,29 @@ body {
 
 .hidden{
     display: none;
+}
+
+
+
+.disclaimer-banner {
+    background-color: #fff8e1;
+    border: 1px solid #ffe0b2;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: #5d4037;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.disclaimer-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.disclaimer-text {
+    line-height: 1.4;
 }
