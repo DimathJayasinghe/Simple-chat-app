@@ -56,6 +56,7 @@ body {
 }
 
 .message-form {
+    margin-top: 10px;
     border-top: 1px solid #eaeaea;
     padding: 15px 10px 5px;
     display: flex;
@@ -89,8 +90,6 @@ body {
     background-color: #388e3c;
 }
 
-/* Add these styles to the bottom of your existing CSS file */
-
 .system-message {
     text-align: center;
     color: #757575;
@@ -110,4 +109,50 @@ body {
 
 .own-message .message-author {
     color: #1976d2;
+}
+
+#new-message-popup {
+    border: 1px solid black;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+    background-color: rgba(87, 59, 228, 0.8);
+    color: #e3f2fd;
+    animation: jump 0.6s ease-in-out 3;
+    margin-left: auto;
+    margin-bottom: 1%;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#new-message-popup:hover{
+    background-color: rgba(87, 59, 228, 1);
+    transform: scale(1.01);
+}
+
+.hidden#new-message-popup {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+@keyframes jump {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.hidden{
+    display: none;
 }
