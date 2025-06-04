@@ -56,11 +56,11 @@ body {
 }
 
 .message-form {
-    margin-top: 10px;
-    border-top: 1px solid #eaeaea;
+    margin-top: 20px;
     padding: 15px 10px 5px;
     display: flex;
     gap: 10px;
+    border-top: 1px solid #eaeaea;
 }
 
 .message-input {
