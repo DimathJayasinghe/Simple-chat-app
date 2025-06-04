@@ -85,7 +85,7 @@ function cleanupClient(socket) {
   const userId = connectedClients.get(socket);
   if (userId) {
     console.log(`Client ${userId} disconnected`);
-    usedUserIds.delete(userId);  
+    usedUserIds.delete(userId);
   }
 
   connectedClients.delete(socket);
@@ -168,11 +168,11 @@ function onSocketReadable(socket) {
 
     // Read the mask key
     const maskKey = socket.read(MASK_KEY_BYTES_LENGTH);
-    if (maskKey === null) return;
+    if (!maskKey || maskKey.length < MASK_KEY_BYTES_LENGTH) return;
 
     // Read the encoded message
     const encoded = socket.read(messageLength);
-    if (encoded === null) return;
+    if (!encoded || encoded.length < messageLength) return;
 
     const decoded = unmask(encoded, maskKey);
     const received = decoded.toString("utf-8");
@@ -242,6 +242,7 @@ function sendMessage(msg, socket) {
     socket.write(dataFrameBuffer);
   } catch (err) {
     console.error("Error sending message to client:", err);
+    cleanupClient(socket); // Clean up on error
   }
 }
 
